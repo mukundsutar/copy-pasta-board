@@ -1,26 +1,76 @@
-const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-        const response = await axios.post(
-            "http://localhost:3001/api/submit-form",
-            { textArea }
-        );
-        console.log(response.data);
-    } catch (error) {
-        console.error("Error submitting form:", error);
-    }
-};
 
 
-const handleGetEncryptedData = async () => {
-    try {
-        const response = await axios.get(
-            "http://localhost:3001/api/get-encrypted-data"
-        );
-        console.log(response.data);
-        setEncryptedData(response.data.encryptedData);
-    } catch (error) {
-        console.error("Error getting encrypted data:", error);
-    }
-};
+function App() {
+    const [textArea, setTextArea] = useState("");
+    const [encryptedData, setEncryptedData] = useState("");
+
+    const handleChange = (e) => {
+        setTextArea(e.target.value);
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await axios.post(
+                "http://localhost:3001/api/submit-form",
+                { textArea }
+            );
+            console.log(response.data);
+        } catch (error) {
+            console.error("Error submitting form:", error);
+        }
+    };
+
+    const handleGetEncryptedData = async () => {
+        try {
+            const response = await axios.get(
+                "http://localhost:3001/api/get-encrypted-data"
+            );
+            console.log(response.data);
+            setEncryptedData(response.data.encryptedData);
+        } catch (error) {
+            console.error("Error getting encrypted data:", error);
+        }
+    };
+
+    return (
+        <>
+            <Center width={"100vw"} height={"100vh"}>
+                <FormControl>
+                    <VStack>
+                        <FormLabel>Copy-Pasta here:</FormLabel>
+                        <Textarea
+                            maxWidth={500}
+                            maxHeight={500}
+                            size="lg"
+                            // resize={"none"}
+                            placeholder="enter text here.."
+                            value={textArea}
+                            onChange={handleChange}
+                        />
+
+                        <Button type="submit" onClick={handleSubmit}>
+                            Submit
+                        </Button>
+                        <Button onClick={handleGetEncryptedData}>
+                            Generate URL
+                        </Button>
+
+                        {encryptedData && (
+                            <>
+                                <Text>Your URL:</Text>
+
+                                <Link href="https://www.google.com/">
+                                    {encryptedData}
+                                </Link>
+                            </>
+                        )}
+                    </VStack>
+                </FormControl>
+            </Center>
+        </>
+    );
+}
+
+export default App;

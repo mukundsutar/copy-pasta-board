@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const Cryptr = require("cryptr");
+const { text } = require("stream/consumers");
 
 const cryptr = new Cryptr("myTotallySecretKey", {
     saltLength: 1,
@@ -14,8 +15,17 @@ let decryptedData = "";
 let encryptedData = "";
 
 app.post("/api/submit-form", (req, res) => {
-    const textArea = req.body;
+    let textArea = req.body;
     console.log("Received Data: ", textArea);
+
+    textArea = JSON.stringify(textArea);
+
+    console.log(encryptMessage(textArea));
+    console.log(
+        decryptMessage(encryptMessage(textArea))
+            .replace('{"textArea":"', "")
+            .replace('"}', "")
+    );
 });
 
 app.listen(PORT, () => {
