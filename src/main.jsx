@@ -11,7 +11,7 @@ const router = createBrowserRouter([
         element: <App />,
     },
     {
-        path: "/:encryptedData",
+        path: "/:id",
         element: <PastedData />,
     },
 ]);
