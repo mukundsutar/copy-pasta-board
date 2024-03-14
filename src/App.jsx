@@ -34,6 +34,18 @@ function App() {
         }
     };
 
+    const handleLink = async () => {
+        try {
+            const response = await axios.get(
+                "http://localhost:3001/api/get-encrypted"
+            );
+            setEncryptedData(response.data);
+            console.log(response.data);
+        } catch (error) {
+            console.error("Error Submitting the form:", error);
+        }
+    };
+
     return (
         <>
             <Center width={"100vw"} height={"100vh"}>
@@ -53,11 +65,7 @@ function App() {
                         <Button type="submit" onClick={handleSubmit}>
                             Submit
                         </Button>
-                        <Button
-                        // onClick={handleGetEncryptedData}
-                        >
-                            Generate URL
-                        </Button>
+                        <Button onClick={handleLink}>Generate URL</Button>
 
                         {encryptedData && (
                             <>
