@@ -12,7 +12,8 @@ app.use(
     })
 );
 
-const cryptr = new Cryptr("myTotallySecretKey", {
+const cryptr = new Cryptr("mutant", {
+    encoding: 'base64url',
     saltLength: 1,
 });
 

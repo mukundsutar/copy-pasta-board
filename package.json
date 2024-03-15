@@ -22,6 +22,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3",
+    "string-uglify": "^3.0.11",
     "util": "^0.12.5"
   },
   "devDependencies": {
