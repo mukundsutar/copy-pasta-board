@@ -5,16 +5,31 @@ import { Textarea } from "@chakra-ui/react";
 import { Center } from "@chakra-ui/react";
 
 export default function PastedData() {
-    
+    const [decryptedData, setDecryptedData] = useState("");
+
+    let location = useLocation();
+    const cipher = location.pathname.slice(1);
+
+    useEffect(() => {
+        const getDecrypted = async () => {
+            try {
+                const response = await axios.post(
+                    "http://localhost:3001/api/submit-decrypt",
+                    { cipher }
+                );
+                setDecryptedData(response.data);
+            } catch (error) {
+                console.error("Error getting encrypted data:", error);
+            }
+        };
+
+        getDecrypted();
+    }, []);
 
     return (
         <>
             <Center width={"100vw"} height={"100vh"}>
-            {decryptedData && (
-                    <Textarea
-                        defaultValue={decryptedData}
-                    />
-                )}
+                <Textarea defaultValue={decryptedData} />
             </Center>
         </>
     );

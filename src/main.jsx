@@ -11,7 +11,7 @@ const router = createBrowserRouter([
         element: <App />,
     },
     {
-        path: "/:id",
+        path: "/:hash",
         element: <PastedData />,
     },
 ]);

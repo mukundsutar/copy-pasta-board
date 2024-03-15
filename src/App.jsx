@@ -24,23 +24,13 @@ function App() {
 
         try {
             const response = await axios.post(
-                "http://localhost:3001/api/submit-form",
+                "http://localhost:3001/api/submit-encrypt",
                 { textArea }
             );
 
             console.log(textArea);
-        } catch (error) {
-            console.error("Error Submitting the form:", error);
-        }
-    };
 
-    const handleLink = async () => {
-        try {
-            const response = await axios.get(
-                "http://localhost:3001/api/get-encrypted"
-            );
             setEncryptedData(response.data);
-            console.log(response.data);
         } catch (error) {
             console.error("Error Submitting the form:", error);
         }
@@ -65,12 +55,10 @@ function App() {
                         <Button type="submit" onClick={handleSubmit}>
                             Submit
                         </Button>
-                        <Button onClick={handleLink}>Generate URL</Button>
+                        {/* <Button onClick={handleLink}>Generate URL</Button> */}
 
                         {encryptedData && (
                             <>
-                                <Text>Your URL:</Text>
-
                                 <Link to={`${encryptedData}`}>
                                     Your unique URL
                                 </Link>
