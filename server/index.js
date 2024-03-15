@@ -3,17 +3,18 @@ const bodyParser = require("body-parser");
 const Cryptr = require("cryptr");
 const cors = require("cors");
 
+const app = express();
+const PORT = 3001;
+app.use(
+    bodyParser.json(),
+    cors({
+        origin: "http://localhost:5173",
+    })
+);
+
 const cryptr = new Cryptr("myTotallySecretKey", {
     saltLength: 1,
 });
-const app = express();
-const PORT = 3001;
-
-const corsOptions = {
-    origin: "http://localhost:5173",
-};
-
-app.use(bodyParser.json(), cors(corsOptions));
 
 let decryptedData = "";
 let encryptedData = "";
@@ -42,8 +43,6 @@ app.post("/api/submit-decrypt", (req, res) => {
         .replace('{"cipher":"', "")
         .replace('"}', "");
 
-    console.log();
-    console.log("Received Cipher: ", cipher);
     console.log();
 
     decryptedData = decryptMessage(cipher);
