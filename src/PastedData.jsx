@@ -43,7 +43,13 @@ export default function PastedData() {
                         defaultValue={decryptedData}
                     />
 
-                    <Button backgroundColor={'#65c3ba'} color={'#009687'} _hover={{color:'aliceblue'}}>Go back to copying?</Button>
+                    <Button
+                        backgroundColor={"#65c3ba"}
+                        color={"#009687"}
+                        _hover={{ color: "aliceblue" }}
+                    >
+                        Go back to copying?
+                    </Button>
                 </VStack>
             </Center>
         </>
