@@ -13,7 +13,7 @@ app.use(
 );
 
 const cryptr = new Cryptr("mutant", {
-    encoding: 'base64url',
+    encoding: "hex",
     saltLength: 1,
 });
 
